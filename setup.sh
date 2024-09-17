@@ -56,14 +56,16 @@ sudo nala install pkg-config libssl-dev build-essential -y
 echo "Installing nushell, zoxide, and oh-my-posh..."
 cargo install nu
 cargo install zoxide
-curl -L https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/master/installer.sh | sh
+curl -s https://ohmyposh.dev/install.sh | bash -s
 
 # Configure oh-my-posh with JetBrains Mono font and agnosterplus theme
 echo "Configuring oh-my-posh..."
-oh-my-posh theme agnosterplus
+export PATH=$PATH:/home/johnh/.local/bin
 oh-my-posh font install JetBrainsMono
+oh-my-posh init --config 'https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/agnosterplus.omp.json'
 
 # Add Aliases to .bashrc and Nushell config
+echo "adding aliases"
 echo -e "\nsource ~/.bashrc_aliases" >> ~/.bashrc
 echo -e "\nsource ~/.nu_aliases.nu" >> ~/.config/nushell/config.nu
 
