@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Created by: John Hanekom
 # Created on: Sept 2024
 # setup.sh file
