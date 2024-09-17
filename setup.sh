@@ -1,3 +1,8 @@
+#!/bin/bash
+# Created by: John Hanekom
+# Created on: Sept 2024
+# setup.sh file
+
 set -e  # Exit immediately on non-zero exit code
 
 # Update and upgrade system packages (using apt)
@@ -9,7 +14,7 @@ echo "Installing nala..."
 sudo apt install nala -y
 
 # Use nala to update and upgrade
-nala update && nala upgrade -y
+nala update -y && nala upgrade -y
 
 # Remove w3m (assuming you don't need it)
 echo "Removing w3m..."
@@ -43,8 +48,8 @@ sudo apt install default-jdk -y
 echo "Installing Rust..."
 curl --proto https https://sh.rustup.rs -sSf | sh
 
-# Install zoxide, nushell, oh-my-posh
-echo "Installing zoxide, nushell, oh-my-posh..."
+# Install zoxide, nushell, and oh-my-posh
+echo "Installing zoxide, nushell, and oh-my-posh..."
 source $HOME/.bashrc  # Ensure rustup is loaded
 rustup component add rls nightly
 cargo install zoxide
