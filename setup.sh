@@ -14,15 +14,15 @@ echo "Installing nala..."
 sudo apt install nala -y
 
 # Use nala to update and upgrade
-nala update -y && nala upgrade -y
+nala update && nala upgrade -y
 
 # Remove w3m
 echo "Removing w3m..."
-sudo apt remove w3m -y
+sudo nala remove w3m -y
 
 # Install additional tools
 echo "Installing stow, neofetch, git, and gh..."
-sudo apt install stow neofetch git gh -y
+sudo nala install stow neofetch git gh -y
 
 # Install fzf from source
 echo "Installing fzf..."
@@ -42,16 +42,16 @@ cd ..
 # Install Bun and Java
 echo "Installing Bun and Java..."
 curl https://setup.bun.sh | bash
-sudo apt install default-jdk -y
+sudo nala install default-jdk -y
 
 # Install Rust via rustup
 echo "Installing Rust..."
 curl --proto https https://sh.rustup.rs -sSf | sh
+source ~/.bashrc
 
 # Install zoxide, nushell, and oh-my-posh
 echo "Installing zoxide, nushell, and oh-my-posh..."
-source $HOME/.bashrc  # Ensure rustup is loaded
-rustup component add rls nightly
+source ~/.bashrc  # Ensure rustup is loaded
 cargo install zoxide
 curl -L https://install.nushell.sh | sh
 curl -L https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/master/installer.sh | sh
