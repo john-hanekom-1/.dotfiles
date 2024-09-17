@@ -1,5 +1,3 @@
-#!/bin/bash
-
 set -e  # Exit immediately on non-zero exit code
 
 # Update and upgrade system packages (using apt)
