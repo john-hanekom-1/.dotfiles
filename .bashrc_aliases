@@ -1,0 +1,2 @@
+alias updupg='sudo nala upgrade --update -y'
+alias ll='ls -alF'
