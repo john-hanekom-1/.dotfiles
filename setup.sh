@@ -46,10 +46,10 @@ sudo nala install default-jdk -y
 
 # Install Rust via rustup
 echo "Installing Rust..."
-curl --proto https https://sh.rustup.rs -sSf | sh -s -- --default-toolchain none
+curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 # Install nushell, zoxide, and oh-my-posh
-source ~/.bashrc  # Ensure rustup is loaded
+source ~/.bashrc
 source ~/.cargo/env
 echo "Installing nushell dependencies..."
 sudo nala install pkg-config libssl-dev build-essential -y
