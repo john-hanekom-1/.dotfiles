@@ -27,7 +27,7 @@ sudo nala install stow neofetch git gh -y
 # Install fzf from source
 echo "Installing fzf..."
 git clone --depth=1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+~/.fzf/install --key-bindings --completion --update-rc
 
 # Install NeoVim from source
 echo "Installing NeoVim dependencies..."
@@ -46,11 +46,11 @@ sudo nala install default-jdk -y
 
 # Install Rust via rustup
 echo "Installing Rust..."
-curl --proto https https://sh.rustup.rs -sSf | sh
-source ~/.cargo/env
+curl --proto https https://sh.rustup.rs -sSf | sh -s -- --default-toolchain none
 
 # Install nushell, zoxide, and oh-my-posh
 source ~/.bashrc  # Ensure rustup is loaded
+source ~/.cargo/env
 echo "Installing nushell dependencies..."
 sudo nala install pkg-config libssl-dev build-essential -y
 echo "Installing nushell, zoxide, and oh-my-posh..."
