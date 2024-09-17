@@ -16,7 +16,7 @@ sudo apt install nala -y
 # Use nala to update and upgrade
 nala update -y && nala upgrade -y
 
-# Remove w3m (assuming you don't need it)
+# Remove w3m
 echo "Removing w3m..."
 sudo apt remove w3m -y
 
