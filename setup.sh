@@ -14,7 +14,7 @@ echo "Installing nala..."
 sudo apt install nala -y
 
 # Use nala to update and upgrade
-nala update && nala upgrade -y
+sudo nala update && sudo nala upgrade -y
 
 # Remove w3m
 echo "Removing w3m..."
