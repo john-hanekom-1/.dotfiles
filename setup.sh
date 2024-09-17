@@ -7,7 +7,7 @@ set -e  # Exit immediately on non-zero exit code
 
 # Update and upgrade system packages (using apt)
 echo "Updating and upgrading system..."
-sudo apt update && sudo apt upgrade -y
+sudo apt update && sudo apt full-upgrade -y
 
 # Install nala
 echo "Installing nala..."
