@@ -58,8 +58,8 @@ curl -L https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/master/insta
 
 # Configure oh-my-posh with JetBrains Mono font and agnosterplus theme
 echo "Configuring oh-my-posh..."
-omp theme agnosterplus
-omp font install JetBrainsMono
+oh-my-posh theme agnosterplus
+oh-my-posh font install JetBrainsMono
 
 # Add Aliases to .bashrc and Nushell config
 echo -e "\nsource ~/.bashrc_aliases" >> ~/.bashrc
