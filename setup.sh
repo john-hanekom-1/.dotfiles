@@ -53,8 +53,12 @@ source ~/.bashrc  # Ensure rustup is loaded
 source ~/.cargo/env
 echo "Installing nushell dependencies..."
 sudo nala install pkg-config libssl-dev build-essential -y
-echo "Installing nushell, zoxide, and oh-my-posh..."
+echo "Installing nushell..."
 cargo install nu
+echo "Initializing nushell..."
+nu
+exit
+echo "Installing zoxide and oh-my-posh..."
 cargo install zoxide
 curl -s https://ohmyposh.dev/install.sh | bash -s
 
@@ -62,14 +66,17 @@ curl -s https://ohmyposh.dev/install.sh | bash -s
 echo "Configuring oh-my-posh..."
 export PATH=$PATH:/home/johnh/.local/bin
 oh-my-posh font install JetBrainsMono
-oh-my-posh init --config 'https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/agnosterplus.omp.json'
+echo -e "\neval \"\$(oh-my-posh init bash)\"" >> ~/.bashrc
+exec bash
+oh-my-posh init bash --config 'https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/agnosterplus.omp.json'
+oh-my-posh init nu --config 'https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/agnosterplus.omp.json'
 
 # Add Aliases to .bashrc and Nushell config
-echo "adding aliases"
+echo "adding aliases..."
 echo -e "\nsource ~/.bashrc_aliases" >> ~/.bashrc
 echo -e "\nsource ~/.nu_aliases.nu" >> ~/.config/nushell/config.nu
 
-# Reload bash profile to apply oh-my-posh configuration
+# Final step
 source ~/.bashrc
 
 echo "Setup complete!"
