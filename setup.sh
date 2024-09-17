@@ -49,11 +49,13 @@ echo "Installing Rust..."
 curl --proto https https://sh.rustup.rs -sSf | sh
 source ~/.cargo/env
 
-# Install zoxide, nushell, and oh-my-posh
-echo "Installing zoxide, nushell, and oh-my-posh..."
+# Install nushell, zoxide, and oh-my-posh
 source ~/.bashrc  # Ensure rustup is loaded
+echo "Installing nushell dependencies..."
+sudo nala install pkg-config libssl-dev build-essential -y
+echo "Installing nushell, zoxide, and oh-my-posh..."
+cargo install nu
 cargo install zoxide
-curl -L https://install.nushell.sh | sh
 curl -L https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/master/installer.sh | sh
 
 # Configure oh-my-posh with JetBrains Mono font and agnosterplus theme
