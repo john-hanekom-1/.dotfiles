@@ -47,7 +47,7 @@ sudo nala install default-jdk -y
 # Install Rust via rustup
 echo "Installing Rust..."
 curl --proto https https://sh.rustup.rs -sSf | sh
-source ~/.bashrc
+source ~/.cargo/env
 
 # Install zoxide, nushell, and oh-my-posh
 echo "Installing zoxide, nushell, and oh-my-posh..."
