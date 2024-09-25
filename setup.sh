@@ -73,8 +73,8 @@ sudo nala upgrade --update -y
 echo "Installing nushell..."
 cargo install nu
 echo "Initializing nushell..."
+echo -e "y\ny\n" | nu || true
 exit
-nu
 
 echo "Installing zoxide and oh-my-posh..."
 cargo install zoxide
