@@ -54,9 +54,11 @@ make CMAKE_BUILD_TYPE=RelWithDebInfo
 sudo make install
 cd ..
 
-# Install Bun and Java
-echo "Installing Bun and Java..."
-curl https://setup.bun.sh | bash
+# Install Deno and Java
+echo "Installing Deno and Java..."
+curl -fsSL https://deno.land/install.sh | sh
+deno upgrade
+deno upgrade rc
 sudo nala install default-jdk -y
 sudo nala upgrade --update -y
 
@@ -83,8 +85,9 @@ curl -s https://ohmyposh.dev/install.sh | bash -s
 # Configure oh-my-posh with JetBrains Mono font and agnosterplus theme
 echo "Configuring oh-my-posh..."
 export PATH=$PATH:/home/johnh/.local/bin
-oh-my-posh font install JetBrainsMono
+# change this
 echo -e "\neval \"\$(oh-my-posh init bash)\"" >> ~/.bashrc
+
 exec bash
 oh-my-posh init bash --config 'https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/agnosterplus.omp.json'
 oh-my-posh init nu --config 'https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/agnosterplus.omp.json'
