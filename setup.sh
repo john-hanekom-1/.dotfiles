@@ -31,56 +31,97 @@ sudo apt install nala -y
 sudo nala upgrade --update -y
 
 # Remove w3m
-echo "Removing w3m..."
-sudo nala remove w3m -y
+  echo "Removing w3m..."
+if type -t w3m; then
+  sudo nala remove w3m -y
+else
+  echo 'w3m did not need to be removed'
+fi
 
 # Install additional tools
-echo "Installing stow, neofetch, git, and gh..."
-sudo nala install stow neofetch git gh -y
+echo "Installing additional tools..."
+for f in 'build-essential' 'cmake' 'curl' 'default-jdk' 'gettext' \
+    'git' 'git-lfs' 'gh' 'libssl-dev' 'neofetch' 'pkg-config' \
+    'stow' 'unzip'; do
+  if ! type -t "$f"; then
+    sudo nala install "$f" -y
+  else
+    echo "$f already installed"
+  fi
+done
 
 # Install fzf from source
 echo "Installing fzf..."
-git clone --depth=1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --key-bindings --completion --update-rc
+if [[ -e ~/.fzf ]]; then
+  echo '~/.fzf found so fzf not reinstalled'
+else
+  git clone --depth=1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install --key-bindings --completion --update-rc
+fi
 
 # Install NeoVim from source
 echo "Installing NeoVim dependencies..."
-sudo nala install ninja-build gettext cmake unzip curl build-essential -y
-sudo nala upgrade --update -y
-echo "Installing NeoVim..."
-git clone https://github.com/neovim/neovim
-cd neovim
-make CMAKE_BUILD_TYPE=RelWithDebInfo
-sudo make install
-cd ..
+if type -t ninja-build; then
+  echo 'ninja-build already installed'
+else
+  sudo nala install ninja-build -y
+  sudo nala upgrade --update -y
+fi
 
-# Install Deno and Java
-echo "Installing Deno and Java..."
-curl -fsSL https://deno.land/install.sh | sh
-deno upgrade
-deno upgrade rc
-sudo nala install default-jdk -y
-sudo nala upgrade --update -y
+echo "Installing NeoVim..."
+if [[ -e '~/neovim' ]]; then
+  echo '~/neovim found so fzf not reinstalled'
+else
+  git clone https://github.com/neovim/neovim
+  (
+    cd neovim
+    make CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make install
+  )
+fi
+
+# Install Deno
+echo "Installing Deno..."
+# TODO do no do this if deno already installed
+  curl -fsSL https://deno.land/install.sh | sh
+  deno upgrade
+  deno upgrade rc
+  sudo nala upgrade --update -y
+
 
 # Install Rust via rustup
 echo "Installing Rust..."
-curl https://sh.rustup.rs -sSf | sh -s -- -y
-source ~/.cargo/env # Setup the Rust and Cargo environment
+if [[ -e '~/.cargo' ]]; then
+  echo '~/.cargo found so rustup not reinstalled'
+else
+  curl https://sh.rustup.rs -sSf | sh -s -- -y
+  source ~/.cargo/env # Setup the Rust and Cargo environment
+fi
 
 # Install nushell, zoxide, and oh-my-posh
 # source ~/.bashrc
-echo "Installing nushell dependencies..."
-sudo nala install pkg-config libssl-dev build-essential -y
-sudo nala upgrade --update -y
 echo "Installing nushell..."
-cargo install nu
-echo "Initializing nushell..."
-echo -e "y\ny\n" | nu || true
-exit
+if type -t nu; then
+  echo 'nu already installed'
+else
+  cargo install nu
+  echo -e "y\ny\n" | nu || true
+fi
+# exit
 
-echo "Installing zoxide and oh-my-posh..."
-cargo install zoxide
-curl -s https://ohmyposh.dev/install.sh | bash -s
+echo "Installing zoxide..."
+if type -t zoxide; then
+  echo 'zoxide already installed'
+else
+  cargo install zoxide
+fi
+
+echo 'Installing oh-my-posh...'
+if type -t ohmyposh; then
+  echo 'oh-my-posh already installed'
+else
+  curl -s https://ohmyposh.dev/install.sh | bash -s
+fi
 
 # Configure oh-my-posh with JetBrains Mono font and agnosterplus theme
 echo "Configuring oh-my-posh..."
